@@ -1,0 +1,42 @@
+import tkinter as tk
+
+def convert_units():
+    try:
+        input_value = float(entry.get())
+        from_unit = from_units.get()
+        to_unit = to_units.get()
+
+        # Conversion logic for different units
+        if from_unit == "Kilograms" and to_unit == "Pounds":
+            result = input_value * 2.20462
+        elif from_unit == "Pounds" and to_unit == "Kilograms":
+            result = input_value / 2.20462
+        # Add more conversions for other units here
+
+        result_label.config(text=f"Result: {result:.2f} {to_unit}", fg="green")
+    except ValueError:
+        result_label.config(text="Invalid input", fg="red")
+
+root = tk.Tk()
+root.title("Unit Converter")
+
+entry = tk.Entry(root, width=15, font=("Arial", 12), bg="lightyellow", fg="black")
+entry.grid(row=0, column=0, padx=10, pady=10)
+
+from_units = tk.StringVar()
+from_units.set("Kilograms")
+to_units = tk.StringVar()
+to_units.set("Pounds")
+
+from_units_menu = tk.OptionMenu(root, from_units, "Kilograms", "Pounds")
+from_units_menu.grid(row=0, column=1, padx=10, pady=10)
+to_units_menu = tk.OptionMenu(root, to_units, "Kilograms", "Pounds")
+to_units_menu.grid(row=0, column=2, padx=10, pady=10)
+
+convert_button = tk.Button(root, text="Convert", command=convert_units, font=("Arial", 12), bg="blue", fg="white")
+convert_button.grid(row=0, column=3, padx=10, pady=10)
+
+result_label = tk.Label(root, text="Result:", font=("Arial", 14))
+result_label.grid(row=1, column=0, columnspan=4, padx=10, pady=10)
+
+root.mainloop()
